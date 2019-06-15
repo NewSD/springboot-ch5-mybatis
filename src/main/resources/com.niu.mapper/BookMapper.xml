@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niu.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="com.niu.entity.Book">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addBook" parameterType="com.niu.entity.Book">
+        INSERT INTO book(name,author) VALUES (#{name},#{author})
+    </insert>
+
+    <update id="updateBookById" parameterType="com.niu.entity.Book">
+        UPDATE book SET name=#{name},author=#{author} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteBookById" parameterType="java.lang.Integer" >
+        delete from book where id = #{id}
+    </delete>
+
+    <select id="getBookById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM book WHERE id = #{id}
+    </select>
+
+    <select id="getAllBooks" resultMap="BaseResultMap">
+        SELECT * FROM book
+    </select>
+
+</mapper>
